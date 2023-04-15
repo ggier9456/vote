@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-hashes' 'sha256-nMxMqdZhkHxz5vAuW/PAoLvECzzsmeAxD/BNwG15HuA=">
+    <link href="https://css.example.com/some-file.css" rel="stylesheet">
+    <title>投票系統</title>
+</head>
+<body>
+<h2>投票項目</h2>
+<hr/>
+<table>
+    <form action="/vote" method="post">
+        <div style="margin-bottom:15px ">
+            使用者名稱:<input type="text" name="voteName" value="" placeholder="輸入使用者名稱" style="padding: 5px;border-radius: 5px;">
+            <div th:if="${voteName}=='null'" style="color: red" >使用者名稱不可為空白!</div>
+            <div th:if="${voteItemId}=='null'" style="color: red" >請選擇投票項目!</div>
+        </div>
+
+        <table border="1" style="border-collapse:collapse;">
+            <tr class="car_item">
+                <th>投票</th>
+                <th>投票項目</th>
+                <th>目前票數</th>
+            </tr>
+            <tr th:each="item,index: ${voteItem}">
+                <td><input type="checkbox" name="voteItemList" th:value="${item.voteId}"></td>
+                <td th:text="${item.voteItemName}"></td>
+                <td th:text="${item.count}"></td>
+            </tr>
+        </table>
+        <input type="submit" value="送出投票" style="margin-top:15px;">
+        <h2 th:if="${insertOk != null}">投票成功!!</h2>
+    </form>
+</body>
+</html>

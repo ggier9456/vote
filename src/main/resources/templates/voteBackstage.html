@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self' https://css.example.com">
+  <link href="https://css.example.com/some-file.css" rel="stylesheet">
+  <title>Document</title>
+</head>
+<body>
+<h2>投票項目</h2>
+<hr/>
+<table>
+    <table border="1" style="border-collapse:collapse;">
+      <tr class="car_item">
+        <th>投票項目</th>
+        <th>刪除項目</th>
+      </tr>
+      <tr th:each="item, index: ${voteItem}">
+        <td th:text="${item.voteItemName}"></td>
+        <td><form action="/voteBackstage/del" method="get"><input type="hidden" name="delId" th:value="${item.voteId}"><input type="submit" name="delete" value="刪除"></form></td>
+      </tr>
+    </table>
+  <form action="/voteBackstage" method="post">
+    新增投票項目:<input type="text" name="voteItemName" placeholder="投票項目名稱" style="padding: 5px;border-radius: 5px; margin-right: 15px;">
+    <input type="submit" value="新增" style="margin-top:15px;">
+    <p style="color: red;" th:if ="${insertName == 'null'}">新增項目不能為空!</p>
+    <h2 th:if="${insertOk == 'ok'}">新增投票項目成功!</h2>
+  </form>
+
+</body>
+</html>
