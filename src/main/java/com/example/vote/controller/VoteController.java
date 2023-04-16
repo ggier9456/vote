@@ -77,8 +77,8 @@ public class VoteController {
         }
     }
 
-    @GetMapping("/voteBackstage/del")
-    public String del_item(@RequestParam(name = "delId") Integer voteItemId, Model model){
+    @DeleteMapping("/voteBackstage/{voteItemId}")
+    public String del_item(@PathVariable Integer voteItemId, Model model){
         voteItemService.deleteVoteItem(voteItemId);
         List<VoteItem> list= voteItemService.getAllItem();
         model.addAttribute("voteItem", list);

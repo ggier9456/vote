@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self' https://css.example.com">
   <link href="https://css.example.com/some-file.css" rel="stylesheet">
-  <title>Document</title>
+  <title>投票系統後台</title>
 </head>
 <body>
 <h2>投票項目</h2>
@@ -19,7 +19,7 @@
       </tr>
       <tr th:each="item, index: ${voteItem}">
         <td th:text="${item.voteItemName}"></td>
-        <td><form action="/voteBackstage/del" method="get"><input type="hidden" name="delId" th:value="${item.voteId}"><input type="submit" name="delete" value="刪除"></form></td>
+        <td><form th:action="@{/voteBackstage/{id}(id=${item.voteId})}" th:method="DELETE"><input type="submit" name="delete" value="刪除"></form></td>
       </tr>
     </table>
   <form action="/voteBackstage" method="post">
